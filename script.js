@@ -29,18 +29,26 @@ let cart = [];
 // แสดงเมนูอาหาร
 function showMenu() {
     const menu = document.getElementById("menu");
-
-    menu.innerHTML = foods.map(food => `
-        <div class="food-card">
-            <div class="food-icon">${food.icon}</div>
-            <h3>${food.name}</h3>
-            <p class="price">${food.price} บาท</p>
-            <button class="add-btn"
-                onclick="addFood(${food.id})">
-                + เพิ่มรายการ
-            </button>
-        </div>
-    `).join("");
+    if (!menu) return;
+    
+    menu.innerHTML = foods.map(food => {
+        let imageHtml = food.icon.startsWith('http') 
+            ? `<img src="${food.icon}" alt="${food.name}" style="width:100%; height:140px; object-fit:cover; border-radius:8px;">` 
+            : `<span style="font-size: 48px;">${food.icon}</span>`;
+            
+        return `
+            <div class="food-card">
+                <div class="food-icon" style="margin-bottom: 12px; height:140px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                    ${imageHtml}
+                </div>
+                <h3>${food.name}</h3>
+                <p class="price">${food.price} บาท</p>
+                <button class="add-btn" onclick="addFood(${food.id})">
+                    + เพิ่มรายการ
+                </button>
+            </div>
+        `;
+    }).join("");
 }
 
 // เพิ่มอาหารลงตะกร้า
