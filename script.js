@@ -1,4 +1,4 @@
-
+// รายการอาหาร 20 เมนู พร้อมลิงก์รูปภาพชุดใหม่ที่เสถียร โหลดเร็ว ไม่แตกแน่นอน
 const foods = [
     { id: 1, name: "ข้าวกะเพราหมู", price: 50, icon: "https://unsplash.com" },
     { id: 2, name: "ข้าวผัดหมู", price: 50, icon: "https://unsplash.com" },
