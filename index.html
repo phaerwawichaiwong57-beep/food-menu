@@ -1,194 +1,96 @@
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ร้านอร่อยตามสั่ง</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-color: #e65c00;
+            --secondary-color: #f9f9f9;
+            --text-color: #333;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Chula';
+            margin: 0;
+            padding: 0;
+            background-color: #fff5eb;
+            color: var(--text-color);
+        }
+        header {
+            background: linear-gradient(135deg, #ff751a, #e65c00);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        header h1 { margin: 0; font-size: 2.5rem; }
+        header p { margin: 10px 0 0; font-size: 1.1rem; opacity: 0.9; }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        h2 { border-left: 5px solid var(--primary-color); padding-left: 10px; margin-bottom: 25px; }
+        #menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .food-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .food-card:hover { transform: translateY(-5px); }
+        .food-image-box {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #eee;
+            margin-bottom: 15px;
+        }
+        .food-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .food-card h3 { margin: 10px 0 5px; font-size: 1.2rem; }
+        .price { color: var(--primary-color); font-weight: bold; font-size: 1.1rem; margin: 5px 0 15px; }
+        .add-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .add-btn:hover { background-color: #cc5200; }
+    </style>
 </head>
 <body>
 
-<header>
-    <h1>🍛 ร้านอร่อยตามสั่ง</h1>
-    <p>อร่อย สดใหม่ สั่งง่ายผ่าน QR Code</p>
-</header>
+    <header>
+        <h1>🍳 ร้านอร่อยตามสั่ง</h1>
+        <p>อร่อย สดใหม่ สั่งง่ายผ่าน QR Code</p>
+    </header>
 
-<main>
-    <h2>📋 เมนูอาหาร 20 รายการ</h2>
+    <div class="container">
+        <h2>📋 เมนูอาหาร 20 รายการ</h2>
+        <!-- ส่วนนี้จะให้ script.js นำรูปภาพและรายชื่ออาหารมาใส่ให้โดยอัตโนมัติ -->
+        <div id="menu"></div>
+    </div>
 
-    <section id="menu" class="menu">
-
-        <div class="food-card">
-            <div class="food-icon">🍛</div>
-            <h3>ข้าวกะเพราหมูสับ</h3>
-            <p class="price">50 บาท</p>
-            <button class="add-btn" onclick="addFood(1)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍗</div>
-            <h3>ข้าวกะเพราไก่</h3>
-            <p class="price">50 บาท</p>
-            <button class="add-btn" onclick="addFood(2)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍚</div>
-            <h3>ข้าวผัดหมู</h3>
-            <p class="price">50 บาท</p>
-            <button class="add-btn" onclick="addFood(3)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍤</div>
-            <h3>ข้าวผัดกุ้ง</h3>
-            <p class="price">60 บาท</p>
-            <button class="add-btn" onclick="addFood(4)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍳</div>
-            <h3>ข้าวไข่เจียว</h3>
-            <p class="price">40 บาท</p>
-            <button class="add-btn" onclick="addFood(5)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🥓</div>
-            <h3>ข้าวหมูกรอบ</h3>
-            <p class="price">60 บาท</p>
-            <button class="add-btn" onclick="addFood(6)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍗</div>
-            <h3>ข้าวผัดไก่</h3>
-            <p class="price">50 บาท</p>
-            <button class="add-btn" onclick="addFood(7)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🥘</div>
-            <h3>สุกี้แห้งหมู</h3>
-            <p class="price">55 บาท</p>
-            <button class="add-btn" onclick="addFood(8)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍜</div>
-            <h3>ผัดซีอิ๊วหมู</h3>
-            <p class="price">50 บาท</p>
-            <button class="add-btn" onclick="addFood(9)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍝</div>
-            <h3>ผัดไทยกุ้ง</h3>
-            <p class="price">60 บาท</p>
-            <button class="add-btn" onclick="addFood(10)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍖</div>
-            <h3>ข้าวหมูกระเทียม</h3>
-            <p class="price">50 บาท</p>
-            <button class="add-btn" onclick="addFood(11)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍗</div>
-            <h3>ข้าวไก่กระเทียม</h3>
-            <p class="price">50 บาท</p>
-            <button class="add-btn" onclick="addFood(12)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍛</div>
-            <h3>ข้าวผัดต้มยำ</h3>
-            <p class="price">55 บาท</p>
-            <button class="add-btn" onclick="addFood(13)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍜</div>
-            <h3>มาม่าผัดหมู</h3>
-            <p class="price">50 บาท</p>
-            <button class="add-btn" onclick="addFood(14)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍲</div>
-            <h3>ข้าวแกงหมู</h3>
-            <p class="price">50 บาท</p>
-            <button class="add-btn" onclick="addFood(15)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🦀</div>
-            <h3>ข้าวผัดปู</h3>
-            <p class="price">70 บาท</p>
-            <button class="add-btn" onclick="addFood(16)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍳</div>
-            <h3>ข้าวไข่ดาว</h3>
-            <p class="price">40 บาท</p>
-            <button class="add-btn" onclick="addFood(17)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍗</div>
-            <h3>ข้าวไก่ทอด</h3>
-            <p class="price">55 บาท</p>
-            <button class="add-btn" onclick="addFood(18)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🍜</div>
-            <h3>ก๋วยเตี๋ยวหมู</h3>
-            <p class="price">50 บาท</p>
-            <button class="add-btn" onclick="addFood(19)">+ เพิ่มรายการ</button>
-        </div>
-
-        <div class="food-card">
-            <div class="food-icon">🥗</div>
-            <h3>ข้าวลาบหมู</h3>
-            <p class="price">55 บาท</p>
-            <button class="add-btn" onclick="addFood(20)">+ เพิ่มรายการ</button>
-        </div>
-
-    </section>
-
-    <section class="cart">
-        <h2>🛒 รายการอาหารที่สั่ง</h2>
-
-        <div id="cart-list">
-            <p>ยังไม่มีรายการอาหาร</p>
-        </div>
-
-        <h3>
-            รวมทั้งหมด:
-            <span id="total">0</span> บาท
-        </h3>
-
-        <button class="order-btn" onclick="confirmOrder()">
-            ยืนยันการสั่งอาหาร
-        </button>
-
-        <button class="clear-btn" onclick="clearCart()">
-            ล้างรายการ
-        </button>
-    </section>
-</main>
-
-<footer>
-    <p>ขอบคุณที่ใช้บริการ ❤️</p>
-    <p>ระบบเมนูอาหารออนไลน์ QR Code</p>
-</footer>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
