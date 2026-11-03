@@ -114,31 +114,34 @@ function showCart() {
     totalElement.textContent = calculateTotal();
 }
 
-// ยืนยันการสั่งอาหาร
+
+// ยืนยันการสั่งอาหารผ่าน WhatsApp
 function confirmOrder() {
     if (cart.length === 0) {
         alert("กรุณาเลือกอาหารก่อนสั่ง");
         return;
     }
 
-    let receipt = "🍛 ร้านอร่อยตามสั่ง\n";
-    receipt += "รายการอาหารที่สั่ง\n\n";
+    const phone = "66947704696";
+
+    let message = "🍛 ร้านอร่อยตามสั่ง\n";
+    message += "📋 รายการอาหารที่ลูกค้าสั่ง\n\n";
 
     cart.forEach(item => {
-        receipt += `${item.name} x ${item.qty} = ${
+        message += `${item.name} x ${item.qty} = ${
             item.price * item.qty
         } บาท\n`;
     });
 
-    receipt += "\n------------------\n";
-    receipt += `รวมทั้งหมด ${calculateTotal()} บาท`;
-    receipt += "\n------------------";
-    receipt += "\nขอบคุณที่ใช้บริการ ❤️";
+    message += "\n------------------\n";
+    message += `💰 รวมทั้งหมด ${calculateTotal()} บาท\n`;
+    message += "------------------\n";
+    message += "ขอบคุณที่ใช้บริการ ❤️";
 
-    alert(receipt);
+    const url = "https://wa.me/" + phone +
+        "?text=" + encodeURIComponent(message);
 
-    cart = [];
-    showCart();
+    window.open(url, "_blank");
 }
 
 // ล้างรายการอาหาร
